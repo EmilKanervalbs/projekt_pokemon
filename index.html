@@ -9,8 +9,18 @@
     <link type="text/css" rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <input type="text" id="pokemon_input">
+    <button id="pokemon_submit" onclick="LookupPokemon()"> submit </button>
+
     <h2 id="pokemon_name"></h2>
     <div id="pokemon_sprite"></div>
+    <div id="pokemon_stats"> </div>
+
+    <br>
+
+
+    <h3> moves: </h3>
+    <div id="pokemon_moves"> </div>
   </body>
   <script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
   <script src="./js/script.js"></script>
