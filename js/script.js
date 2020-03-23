@@ -3,6 +3,10 @@ const P = new Pokedex.Pokedex();
 var statsElement = document.getElementById("pokemon_stats");
 var movesElement = document.getElementById("pokemon_moves");
 
+// för att få lista med pokemon
+// https://github.com/PokeAPI/pokeapi-js-wrapper#root-endpoints
+
+
 
 document.getElementById("pokemon_sprite").onclick = () => {
   console.log("oi cunt");
@@ -107,7 +111,7 @@ function LookupMove(move) {
       newElement(parent, "power: " + res.power, ["MoveDetail"], "");
       newElement(parent, "accuracy: " + res.accuracy, ["MoveDetail"], "");
       newElement(parent, "pp: " + res.pp, ["MoveDetail"], "");
-      // newElement(parent, "power: " + res.power, ["MoveDetail"], "");
+      newElement(parent, "effect chance: " + res.effect_chance, ["MoveDetail"], "");
 
     
 
@@ -115,6 +119,8 @@ function LookupMove(move) {
 
     });
 }
+
+
 
 
 function newElement(parent, content, classes, id) {
