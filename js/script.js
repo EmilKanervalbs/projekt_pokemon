@@ -12,25 +12,22 @@ document.getElementById("pokemon_sprite").onclick = () => {
 
 document.getElementById("pokemon_input").value = "bulbasaur";
 
-LookupPokemon();
+// LookupPokemon();
 
 
 
-// P.getPokemonByName("bulbasaur")
-//   .then(res => {
-//     //om det blir rätt körs denna kod:
-//     console.log(res);
-//     document.getElementById("pokemon_name").innerHTML = res.name;
-//     document.getElementById(
-//       "pokemon_sprite"
-//     ).innerHTML = `<img src="${res.sprites.front_default}"/>`;
-//   })
-//   .catch(err => {
-//     //om det blir fel körs denna kod:
-//     console.log(err);
-//     document.getElementById("pokemon_name").innerHTML =
-//       "No pokemon by that name";
-// });
+window.onclick = x => {
+  if (x.target.parentElement.classList[0] != "move") {
+    return;
+  } //om det inte är en del av move så kommer den inte bry sig
+
+  LookupMove(x.target.parentElement.id);
+  
+  console.log(x.target.innerHTML);
+}
+
+
+// LookupMove("pound");
 
 
 function LookupPokemon() {
@@ -62,15 +59,15 @@ function LookupPokemon() {
 
     for (let i = 0; i < m.length; i++) {
       let x = document.createElement("div");
-      x.classList.add("move");
+      let y = document.createElement("div");
+      y.classList.add("move");
+      y.id = m[i].move.name;
       x.innerHTML = m[i].move.name;
 
-      console.log(m[i].move.name);
-
-      movesElement.appendChild(x);
+      y.appendChild(x);
+      movesElement.appendChild(y);
 
     }
-
 
   })
   .catch(err => {
@@ -80,6 +77,55 @@ function LookupPokemon() {
       "No pokemon by that name";
   });
 }
+
+
+function LookupMove(move) {
+  P.getMoveByName(move)
+    .then(function(res) {
+      console.log(res);
+
+      // let x = document.createElement("div");
+      // x.innerHTML = "hello there"
+
+      
+      let parent = document.getElementById(move);
+
+      if (parent.childElementCount > 1) {
+        for (let i = 1; parent.childElementCount != 1;) {
+          if (parent.children[i].classList[0] == "MoveDetail") {
+            parent.children[i].outerHTML = "";
+          }
+        }
+        return;
+      }
+
+      console.log(move);
+      
+
+      // document.getElementById(move).appendChild(x);
+
+      newElement(parent, "power: " + res.power, ["MoveDetail"], "");
+      newElement(parent, "accuracy: " + res.accuracy, ["MoveDetail"], "");
+      newElement(parent, "pp: " + res.pp, ["MoveDetail"], "");
+      // newElement(parent, "power: " + res.power, ["MoveDetail"], "");
+
+    
+
+      
+
+    });
+}
+
+
+function newElement(parent, content, classes, id) {
+  let x = document.createElement("div");
+  x.innerHTML = content;
+  x.classList = classes;
+  x.id = id;
+
+  parent.appendChild(x);
+}
+
 
 
 function ShowMoves() {
