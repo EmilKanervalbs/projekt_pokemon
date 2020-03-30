@@ -60,12 +60,6 @@ window.onclick = x => {
   
 }
 
-// uppifrån och ner
-// kanske att den är över hela skärmen
-// visa alla pokenmons typ
-
-// LookupMove("pound");
-
 
 function LookupPokemon() {
   let pokemon = document.getElementById("pokemon_input").value;

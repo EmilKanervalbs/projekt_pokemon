@@ -28,15 +28,26 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
+#pokemon_input {
+    /* border-top-left-radius: 500px; */
+}
+
+#pokemon_name {
+    margin-top: 5px;
+}
+
 .move {
     background-color: #0bb;
     margin: 2px;
     padding: 2px;
+    border-radius: 5px;
 
 }
 
 #pokemon {
     background-color: #0AA;
+    border-radius: 15px;
+    padding: 5px;
 }
 
 body {
