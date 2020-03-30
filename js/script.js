@@ -5,8 +5,15 @@ var pokemonElement = document.getElementById("pokemon_list");
 var statsElement = document.getElementById("pokemon_stats");
 var movesElement = document.getElementById("pokemon_moves");
 
+var pokemon_show_start = 0;
+
 // för att få lista med pokemon
 // https://github.com/PokeAPI/pokeapi-js-wrapper#root-endpoints
+
+P.getEvolutionChainById(3)
+.then(function(response) {
+  console.log(response);
+});
 
 
 
@@ -21,18 +28,36 @@ document.getElementById("pokemon_input").value = "bulbasaur";
 
 LookupPokemon();
 
-showPokemon(0, 10);
+UpdatePokemonList(0);
+
+// showPokemon(0, 10);
 
 window.onclick = x => {
-  if (x.target.parentElement.classList[0] != "move" && x.target.parentElement.parentElement.id != "pokemon_list") {
+  // console.log(x.target);
+
+  if (x.target.parentElement.classList[0] != "move" && x.target.parentElement.classList[0] != "pokepoke" && x.target.classList[0] != "pokepoke") {
     return;
   } //om det inte är en del av move så kommer den inte bry sig
+
+
 
   if (x.target.parentElement.classList[0] == "move") {
     LookupMove(x.target.parentElement.id);
   } 
+  else if(x.target.classList[0] == "pokepoke") 
+  {
+    console.log("AAAAAAAAA");
+    document.getElementById("pokemon_input").value = x.target.getElementsByClassName("pokemon_name")[0].innerHTML;
+    LookupPokemon();
+  } 
+  else if(x.target.parentElement.classList[0] = "pokepoke") 
+  {
+    console.log("BBBBBBBBB");
+    document.getElementById("pokemon_input").value = x.target.parentElement.getElementsByClassName("pokemon_name")[0].innerHTML;
+    LookupPokemon();
+
+  }
   
-  console.log(x.target.innerHTML);
 }
 
 // uppifrån och ner
@@ -48,7 +73,7 @@ function LookupPokemon() {
   //clear saken
 
   statsElement.innerHTML = "";
-
+  movesElement.innerHTML = "";
 
   P.getPokemonByName(pokemon)
   .then(res => {
@@ -140,6 +165,8 @@ function newElement(parent, content, classes, id) {
 
 function showPokemon(a, b) {
 
+  pokemonElement.innerHTML = "";
+
   let interval = {
     limit: b - a,
     offset: a
@@ -169,4 +196,21 @@ function showPokemon(a, b) {
           });
       }
     });
+}
+
+function UpdatePokemonList(x) {
+  showPokemon(pokemon_show_start, pokemon_show_start + 10);
+
+  if (pokemon_show_start + x < 0) {
+    return;
+  }
+
+  pokemon_show_start += x;
+
+  // if (pokemon_show_start == 0) {
+  //   document.getElementById("pokemon_decrease").classList.add("hidden");
+  // } else {
+  //   document.getElementById("pokemon_decrease").classList.remove("hidden");
+  // }
+
 }

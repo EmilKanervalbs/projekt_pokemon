@@ -10,20 +10,31 @@
   </head>
   <body>
 
+    <button onclick="UpdatePokemonList(-10)" id="pokemon_decrease"> previous 10 </button>
+
+    <button onclick="UpdatePokemonList(10)" id="pokemon_increase"> next 10 </button>
+
     <div id="pokemon_list"> </div>
 
-    <input type="text" id="pokemon_input">
-    <button id="pokemon_submit" onclick="LookupPokemon()"> submit </button>
 
-    <h2 id="pokemon_name"></h2>
-    <div id="pokemon_sprite"></div>
-    <div id="pokemon_stats"> </div>
-
+    <br>
     <br>
 
 
-    <h3> moves: </h3>
-    <div id="pokemon_moves"> </div>
+    <input type="text" id="pokemon_input">
+    <button id="pokemon_submit" onclick="LookupPokemon()"> search </button>
+    <div id="pokemon">
+      <div id="pokemon_info">
+        <h2 id="pokemon_name"></h2>
+        <div></div>
+        <div id="pokemon_sprite"></div>
+        <div id="pokemon_stats"> </div>
+      </div>
+      <br>
+
+      <h3> moves: </h3>
+      <div id="pokemon_moves"> </div>
+  </div>
   </body>
   <script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
   <script src="./js/script.js"></script>

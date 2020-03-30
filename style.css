@@ -2,9 +2,44 @@
     padding-left: 10px;
 }
 
-
 #pokemon_list {
     display: grid;
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: 150px 150px 150px 150px 150px;
+}
+
+.pokepoke {
+    margin: 5px;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #ff00ff;
+}
+
+.hidden {
+    display: none;
+}
+
+#pokemon_info {
+    display: grid;
+    grid-template-columns: 150px 150px;
+}
+
+#pokemon_moves {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.move {
+    background-color: #0bb;
+    margin: 2px;
+    padding: 2px;
 
 }
+
+#pokemon {
+    background-color: #0AA;
+}
+
+body {
+    background-color: black;
+}
+
