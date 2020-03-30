@@ -1,3 +1,10 @@
 .MoveDetail {
     padding-left: 10px;
 }
+
+
+#pokemon_list {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+
+}

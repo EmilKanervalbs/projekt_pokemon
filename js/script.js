@@ -1,5 +1,7 @@
 const P = new Pokedex.Pokedex();
 
+var pokemonElement = document.getElementById("pokemon_list");
+
 var statsElement = document.getElementById("pokemon_stats");
 var movesElement = document.getElementById("pokemon_moves");
 
@@ -14,22 +16,28 @@ document.getElementById("pokemon_sprite").onclick = () => {
 
 
 
+
 document.getElementById("pokemon_input").value = "bulbasaur";
 
-// LookupPokemon();
+LookupPokemon();
 
-
+showPokemon(0, 10);
 
 window.onclick = x => {
-  if (x.target.parentElement.classList[0] != "move") {
+  if (x.target.parentElement.classList[0] != "move" && x.target.parentElement.parentElement.id != "pokemon_list") {
     return;
   } //om det inte är en del av move så kommer den inte bry sig
 
-  LookupMove(x.target.parentElement.id);
+  if (x.target.parentElement.classList[0] == "move") {
+    LookupMove(x.target.parentElement.id);
+  } 
   
   console.log(x.target.innerHTML);
 }
 
+// uppifrån och ner
+// kanske att den är över hela skärmen
+// visa alla pokenmons typ
 
 // LookupMove("pound");
 
@@ -121,8 +129,6 @@ function LookupMove(move) {
 }
 
 
-
-
 function newElement(parent, content, classes, id) {
   let x = document.createElement("div");
   x.innerHTML = content;
@@ -132,8 +138,35 @@ function newElement(parent, content, classes, id) {
   parent.appendChild(x);
 }
 
+function showPokemon(a, b) {
 
+  let interval = {
+    limit: b - a,
+    offset: a
+  }
 
-function ShowMoves() {
-  console.log("cuntface");
+  P.getPokemonsList(interval)
+    .then(function(res) {
+      console.log(res);
+      for (let i = 0; i < res.results.length; i++) {
+        console.log("hello");
+        P.getPokemonByName(res.results[i].name)
+          .then(function(pok) {
+            let x = document.createElement("div");
+            x.classList.add("pokepoke");
+
+            let y = document.createElement("div");
+            y.innerHTML = pok.name;
+            y.classList.add("pokemon_name");
+
+            let z = document.createElement("img");
+            z.src = pok.sprites.front_default;
+      
+            x.appendChild(y);
+            x.appendChild(z);
+
+            pokemonElement.appendChild(x);
+          });
+      }
+    });
 }
